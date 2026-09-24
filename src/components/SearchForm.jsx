@@ -21,14 +21,15 @@ function SearchForm() {
   }
 
   return (
-    <div className="search">
+    <div className="search-panel">
       <form onSubmit={handleSubmit} className="search-form">
         <input
           type="text"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search a Pokémon by name…"
+          placeholder="Search by Pokémon name…"
           className="search-input"
+          aria-label="Search for a Pokémon"
         />
         <button type="submit" className="search-button">
           Search

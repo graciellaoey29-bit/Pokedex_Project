@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../config.jsx";
-import { getIdFromUrl, capitalize, getSpriteUrl } from "../utils.jsx";
+import { getIdFromUrl, capitalize, getAnimatedSpriteUrl } from "../utils.jsx";
 
 function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
@@ -41,26 +41,33 @@ function PokemonList() {
   }
 
   return (
-    <ul className="pokemon-list">
-      {pokemons.map((pokemon) => {
-        const id = getIdFromUrl(pokemon.url);
-        return (
-          <li key={pokemon.name} className="pokemon-list-item">
-            <Link to={`/pokemon/${pokemon.name}`} className="pokemon-link">
-              <img
-                className="pokemon-sprite"
-                src={getSpriteUrl(id)}
-                alt={pokemon.name}
-                width={48}
-                height={48}
-              />
-              <span className="pokemon-id">#{id.padStart(3, "0")}</span>
-              <span className="pokemon-name">{capitalize(pokemon.name)}</span>
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <section className="list-panel">
+      <div className="section-header">
+        <h3>Pokémon roster</h3>
+      </div>
+
+      <ul className="pokemon-list">
+        {pokemons.map((pokemon) => {
+          const id = getIdFromUrl(pokemon.url);
+
+          return (
+            <li key={pokemon.name} className="pokemon-list-item">
+              <Link to={`/pokemon/${pokemon.name}`} className="pokemon-link">
+                <img
+                  className="pokemon-sprite"
+                  src={getAnimatedSpriteUrl(id)}
+                  alt={pokemon.name}
+                  width={48}
+                  height={48}
+                />
+                <span className="pokemon-id">#{id.padStart(3, "0")}</span>
+                <span className="pokemon-name">{capitalize(pokemon.name)}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
